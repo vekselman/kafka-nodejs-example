@@ -57,6 +57,13 @@ router.post('/sales', (req, res) => {
   });
 });
 
+router.get("/", function (req, res) {
+  res.send("Test");
+});
+
+router.get("/readyz", (req, res) => res.status(200).json({ status: "ok" }));
+router.get("/livez", (req, res) => res.status(200).json({ status: "ok" }));
+
 router.get('/sales', async (req, res) => {
   const { rows } = await pgClient.query('SELECT id, uuid, total, sale_date, created_at FROM sales');
   res.status(200).json(rows);
